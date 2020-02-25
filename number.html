@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Guess the number</title>
+</head>
+<body>
+	<h2>Guess the number!</h2>
+	<h3>Enter the number</h3>
+
+	<input type="text" name="number"  id="guess_input">  <button onclick="guessNumber()" id="button">Click me</button>
+
+	<p id="message"></p>
+
+	<h3>Win : <span id="win">0</span></h3>
+	<h3>Lose : <span id="lose">0</span></h3>
+
+	<input type="text" name="number"  id="reset_input">  <button onclick="reset()" id="button">Reset</button>
+
+
+
+<script type="text/javascript">
+
+	var randomNum = Math.ceil(Math.random()*100); //random number 1-100. Global var due to permanent/unchangeable. 
+	var numberOfGuesses = 5;
+	var winScore = 0;
+	var loseScore = 0;
+	
+	function guessNumber(){
+		
+		var guessNum = document.getElementById("guess_input").value; //get number input. Have to be local for it to start over
+		
+			if(guessNum == randomNum){
+				document.getElementById("message").innerHTML = "You guess it RIGHT!!"
+				winScore++;
+				document.getElementById("win").innerHTML = winScore;
+			}
+			else if(guessNum < randomNum){
+				document.getElementById("message").innerHTML = "Your guess is too low!" + "(" + guessNum + ")" + numberOfGuesses + " guess remaining"
+				numberOfGuesses--;
+			}
+			else {
+				document.getElementById("message").innerHTML = "Your guess is too high!" + "(" + guessNum + ")" + numberOfGuesses +" guess remaining"
+				numberOfGuesses--;
+			}
+
+			if(numberOfGuesses < 0){
+				document.getElementById("message").innerHTML = "Game Over.....  The number is " + randomNum
+				loseScore++;
+				document.getElementById("lose").innerHTML = loseScore;
+				
+			}
+
+		}
+
+	function reset(){
+		randomNum = Math.ceil(Math.random()*100); //don't put var to change global variable
+		numberOfGuesses = 5; //don't put var to change global variable
+		document.getElementById("message").innerHTML = ""
+		document.getElementById("guess_input").value = ""
+		console.log(randomNum);
+	} 
+	
+	
+	console.log(randomNum);
+	
+</script>
+
+
+</body>
+</html>
